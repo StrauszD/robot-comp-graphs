@@ -33,7 +33,7 @@ void init() // FOR GLUT LOOP
     robot = new Robot();
     
     glEnable(GL_DEPTH_TEST);            // Enable check for close and far objects.
-    glClearColor(0.5, 0.5, 0.5, 0.5);    // Clear the color state.
+    glClearColor(0, 0, 0, 0);    // Clear the color state.
     glMatrixMode(GL_MODELVIEW);            // Go to 3D mode.
     glLoadIdentity();                    // Reset 3D view matrix.
 }
@@ -55,7 +55,6 @@ void display()                                                        // Called 
 void idle()                                                            // Called when drawing is finished.
 {
     robot->update();
-    
     glutPostRedisplay();                                            // Display again.
 }
 

@@ -29,11 +29,11 @@ class Block
 {
 public:
     Block();
-    Block(float _x, float _y, float _z, float _r, float _g, float _b);        //Constructor's signature
+    Block(float _x, float _y, float _z, float _r, float _g, float _b, float _rotX, float _rotY, float _rotAngle);        //Constructor's signature
     ~Block();        //Class Destructor
     
     void draw();    //Called from "display"
-    void update();  //Called from "idle"
+    void update(float _rot);  //Called from "idle"
     
     float x;        // Scale
     float y;        // Scale
@@ -42,6 +42,8 @@ public:
     float r, g, b;    // Color
     
     float rotX;        // Rotation in X Axis
+    float rotY;
+    float rotAngle;
 };
 
 

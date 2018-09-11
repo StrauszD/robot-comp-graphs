@@ -37,18 +37,25 @@ public:
     
     Block* blocks;
     
-    Block* foot;
-    Block* leg;
-    Block* thigh;
+    Block* lFoot;
+    Block* lLeg;
+    Block* lThigh;
+    Block* rFoot;
+    Block* rLeg;
+    Block* rThigh;
     Block* hips;
     Block* waist;
     Block* torso;
     Block* neck;
     Block* head;
-    Block* shoulder;
-    Block* upperArm;
-    Block* lowerArm;
-    Block* hand;
+    Block* lShoulder;
+    Block* lUpperArm;
+    Block* lLowerArm;
+    Block* lHand;
+    Block* rShoulder;
+    Block* rUpperArm;
+    Block* rLowerArm;
+    Block* rHand;
 };
 
 

@@ -18,20 +18,29 @@
 
 Robot::Robot()
 {
-    foot = new Block(3.5, 1.5, 5, .202, .329, .605);                //Blue
-    leg = new Block(3.5, 6, 3, .202, .329, .605);                //Blue
-    thigh = new Block(2.7, 6, 2.7, 1, 1, 1);            //White
+    lFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    lLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    lThigh = new Block(2.7, 6, 2.7, 1, 1, 1, 0.0, 0.0, 0.0);            //White
     
-    hips = new Block(7, 2.5, 4, 0.5, 0.5, 0.5);            //Gray
-    waist = new Block(6, 3, 3, 1, 1, 1);                //White
-    torso = new Block(8, 5, 5, .627, .155, .139);                //Red
-    neck = new Block(2, 1.5, 2, 1, 1, 1);
-    head = new Block(3, 3.5, 3, .202, .329, .605);                //Blue
+    rFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    rLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    rThigh = new Block(2.7, 6, 2.7, 1, 1, 1, 0.0, 0.0, 0.0);
     
-    shoulder = new Block(3, 2.5, 3, .627, .155, .139);            //Red
-    upperArm = new Block(2.3, 2, 2.3, 1, 1, 1);            //White
-    lowerArm = new Block(3, 4, 3, .627, .155, .139);                //Red
-    hand = new Block(2.3, 2.5, 2.3, .202, .329, .605);            //Blue
+    hips = new Block(7, 2.5, 4, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0);            //Gray
+    waist = new Block(6, 3, 3, 1, 1, 1, 0.0, 0.0, 0.0);                //White
+    torso = new Block(8, 5, 5, .627, .155, .139, 0, 1, 0.1);                //Red
+    neck = new Block(2, 1.5, 2, 1, 1, 1, 0.0, 0.0, 0.0);
+    head = new Block(3, 3.5, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    
+    lShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.0, 0.0, 0.0);            //Red
+    lUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);            //White
+    lLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.0, 0.0, 0.0);                //Red
+    lHand = new Block(2.3, 2.5, 2.3, .202, .329, .605, 0.0, 0.0, 0.0);            //Blue
+    
+    rShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.0, 0.0, 0.0);            //Red
+    rUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);            //White
+    rLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.0, 0.0, 0.0);                //Red
+    rHand = new Block(2.3, 2.5, 2.3, .202, .329, .605, 0.0, 0.0, 0.0);
 }
 
 
@@ -82,6 +91,7 @@ void Robot::draw()
     glPushMatrix();
     {
         glTranslatef(0, 14, 0);
+        glRotatef(torso->rotAngle, torso->rotX, torso->rotY, 0);
         torso->draw();
         
         //RIGHT ARM
@@ -93,19 +103,19 @@ void Robot::draw()
             {
                 //RIGHT SHOULDER
                 glTranslatef(-5.5, 0, 0);
-                shoulder->draw();
+                rShoulder->draw();
                 
                 //RIGHT UPPER ARM
                 glTranslatef(0, -2.25, 0);
-                upperArm->draw();
+                rUpperArm->draw();
                 
                 //RIGHT LOWER ARM
                 glTranslatef(0, -3, 0);
-                lowerArm->draw();
+                rLowerArm->draw();
                 
                 //RIGHT HAND
                 glTranslatef(0, -3.25, 0);
-                hand->draw();
+                rHand->draw();
             }
             glPopMatrix();
         }
@@ -120,19 +130,19 @@ void Robot::draw()
             {
                 //LEFT SHOULDER
                 glTranslatef(5.5, 0, 0);
-                shoulder->draw();
+                lShoulder->draw();
                 
                 //LEFT UPPER ARM
                 glTranslatef(0, -2.25, 0);
-                upperArm->draw();
+                lUpperArm->draw();
                 
                 //LEFT LOWER ARM
                 glTranslatef(0, -3, 0);
-                lowerArm->draw();
+                lLowerArm->draw();
                 
                 //LEFT HAND
                 glTranslatef(0, -3.25, 0);
-                hand->draw();
+                lHand->draw();
             }
             glPopMatrix();
             
@@ -149,15 +159,15 @@ void Robot::draw()
     {
         //RIGHT THIGH
         glTranslatef(-2.3, 3.5, 0);
-        thigh->draw();
+        rThigh->draw();
         
         //RIGHT LEG
         glTranslatef(0, -6, 0);
-        leg->draw();
+        rLeg->draw();
         
         //RIGHT FOOT
         glTranslatef(0, -3.75, 1);
-        foot->draw();
+        rFoot->draw();
     }
     glPopMatrix();
     
@@ -166,15 +176,15 @@ void Robot::draw()
     {
         //LEFT THIGH
         glTranslatef(2.3, 3.5, 0);
-        thigh->draw();
+        lThigh->draw();
         
         //LEFT LEG
         glTranslatef(0, -6, 0);
-        leg->draw();
+        lLeg->draw();
         
         //LEFT FOOT
         glTranslatef(0, -3.75, 1);
-        foot->draw();
+        lFoot->draw();
     }
     glPopMatrix();
     
@@ -183,19 +193,11 @@ void Robot::draw()
 
 void Robot::update()
 {
-    foot->update();
-    leg->update();
-    thigh->update();
-    
-    hips->update();
-    waist->update();
-    torso->update();
-    neck->update();
-    head->update();
-    
-    shoulder->update();
-    upperArm->update();
-    lowerArm->update();
-    hand->update();
-    
+    if (torso->rotAngle > 0) {
+        if (torso->rotAngle <= 7) {
+            torso->rotAngle += 0.5f;
+        }
+    } else {
+        torso->rotAngle -= 0.5f;
+    }
 }
