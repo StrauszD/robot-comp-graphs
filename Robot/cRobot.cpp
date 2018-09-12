@@ -3,11 +3,11 @@
 //  Robot
 //
 //  Created by:
-//      Daniel Strausz
-//      Alfonso Ledesma
-//      Alejandro Montaño
-//      Braulio Santiago
-//      Mariana Piscil
+//      Daniel Strausz      A01332949
+//      Alfonso Ledesma     A01339894
+//      Alejandro Montaño   A01339420
+//      Braulio Santiago    A01650398
+//      Mariana Piscil      A01651783
 //  on 9/10/18.
 //  Copyright © 2018 Daniel Strausz. All rights reserved.
 //
@@ -21,36 +21,32 @@ float lLaDir = -1.0;
 
 Robot::Robot()
 {
-    lFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    lLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    lFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);    //Blue
+    lLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);       //Blue
     lThigh = new Block(2.7, 6, 2.7, 1, 1, 1, 0.0, 0.0, 0.0);            //White
     
-    rFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    rLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    rFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);    //Blue
+    rLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);       //Blue
     rThigh = new Block(2.7, 6, 2.7, 1, 1, 1, 0.0, 0.0, 0.0);
     
-    hips = new Block(7, 2.5, 4, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0);            //Gray
+    hips = new Block(7, 2.5, 4, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0);         //Gray
     waist = new Block(6, 3, 3, 1, 1, 1, 0.0, 0.0, 0.0);                //White
-    torso = new Block(8, 5, 5, .627, .155, .139, 0, 1, 0);                //Red
+    torso = new Block(8, 5, 5, .627, .155, .139, 0, 1, 0);             //Red
     neck = new Block(2, 1.5, 2, 1, 1, 1, 0.0, 0.0, 0.0);
-    head = new Block(3, 3.5, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    head = new Block(3, 3.5, 3, .202, .329, .605, 0.0, 0.0, 0.0);      //Blue
     
-    lShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.1, 0.0, 0.0);            //Red
-    lUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);            //White
-    lLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.1, 0.0, 0.0);                //Red
-    lHand = new Block(2.3, 2.5, 2.3, .202, .329, .605, 0.0, 0.0, 0.0);            //Blue
+    lShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.1, 0.0, 0.0); //Red
+    lUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);        //White
+    lLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.1, 0.0, 0.0);   //Red
+    lHand = new Block(2.3, 2.5, 2.3, .202, .329, .605, 0.0, 0.0, 0.0); //Blue
     
-    rShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.1, 0.0, 0.0);            //Red
-    rUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);            //White
-    rLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.1, 0.0, 0.0);                //Red
+    rShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.1, 0.0, 0.0);  //Red
+    rUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);         //White
+    rLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.1, 0.0, 0.0);    //Red
     rHand = new Block(2.3, 2.5, 2.3, .202, .329, .605, 0.0, 0.0, 0.0);
 }
 
-
-Robot::~Robot()
-{
-}
-
+Robot::~Robot() {}
 
 void Robot::draw()
 {
@@ -62,7 +58,6 @@ void Robot::draw()
     }
     glPopMatrix();
     
-    
     //NECK
     glPushMatrix();
     {
@@ -70,7 +65,6 @@ void Robot::draw()
         neck->draw();
     }
     glPopMatrix();
-    
     
     //WAIST
     glPushMatrix();
@@ -80,7 +74,6 @@ void Robot::draw()
     }
     glPopMatrix();
     
-    
     //HIPS
     glPushMatrix();
     {
@@ -88,7 +81,6 @@ void Robot::draw()
         hips->draw();
     }
     glPopMatrix();
-    
     
     //TORSO
     glPushMatrix();
@@ -100,7 +92,7 @@ void Robot::draw()
         //RIGHT ARM
         glPushMatrix();
         {
-            glTranslatef(0, 1.5, 0);                //To Change Shoulder Pivot
+            glTranslatef(0, 1.5, 0);
             
             glPushMatrix();
             {
@@ -129,7 +121,7 @@ void Robot::draw()
         //LEFT ARM
         glPushMatrix();
         {
-            glTranslatef(0, 1.5, 0);                //To Change Shoulder Pivot
+            glTranslatef(0, 1.5, 0);
             
             glPushMatrix();
             {
