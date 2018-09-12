@@ -27,12 +27,12 @@ float lLaDir = -1.0;
 
 Robot::Robot()
 {
-    lFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    lLeg = new Block(3.5, 6, 3, .202, .329, .605, 1.0, 0.0, 25.0);                //Blue
+    lFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 1.0, 0.0, -5.0);                //Blue
+    lLeg = new Block(3.5, 6, 3, .202, .329, .605, 1.0, 0.0, 15.0);                //Blue
     lThigh = new Block(2.7, 6, 2.7, 1, 1, 1, -1.0, 0.0, 1.0);            //White
     
-    rFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    rLeg = new Block(3.5, 6, 3, .202, .329, .605, -1.0, 1.0, 25.0);                //Blue
+    rFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, -5.0);                //Blue
+    rLeg = new Block(3.5, 6, 3, .202, .329, .605, 1.0, 0.0, 15.0);                //Blue
     rThigh = new Block(2.7, 6, 2.7, 1, 1, 1, -1.0, 0.0, -1.0);
     
     hips = new Block(7, 2.5, 4, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0);            //Gray
@@ -176,10 +176,12 @@ void Robot::draw()
         
         //RIGHT LEG
         glTranslatef(0, -6, 0);
+        glRotatef(rLeg->rotAngle, rLeg->rotX, rLeg->rotY, 0);
         rLeg->draw();
         
         //RIGHT FOOT
         glTranslatef(0, -3.75, 1);
+        glRotatef(rFoot->rotAngle, rFoot->rotX, rFoot->rotY, 0);
         rFoot->draw();
     }
     glPopMatrix();
@@ -199,6 +201,7 @@ void Robot::draw()
         
         //LEFT FOOT
         glTranslatef(0, -3.75, 1);
+        glRotatef(lFoot->rotAngle, lFoot->rotX, lFoot->rotY, 0);
         lFoot->draw();
     }
     glPopMatrix();
@@ -209,15 +212,18 @@ void Robot::draw()
 void Robot::update()
 {
     lThigh -> rotAngle += 0.5*directionLeft;
-    rThigh -> rotAngle += 0.5*directionRight;
-    lLeg -> rotAngle += 0.5*directionRight;
-    rLeg -> rotAngle += 0.5*directionLeft;
+    lLeg -> rotAngle += 0.2*directionRight;
+    lFoot-> rotAngle += 0.2*directionLeft;
     
-    if(lThigh->rotAngle == 20 || lThigh->rotAngle == -10){
+    rThigh -> rotAngle += 0.5*directionRight;
+    rLeg -> rotAngle += 0.2*directionLeft;
+    rFoot -> rotAngle += 0.2*directionRight;
+    
+    if(lThigh->rotAngle == 25 || lThigh->rotAngle == -25){
         directionLeft = directionLeft*-1.0f;
     }
     
-    if(rThigh->rotAngle == -20 || rThigh->rotAngle == 10){
+    if(rThigh->rotAngle == -25 || rThigh->rotAngle == 25){
         directionRight = directionRight*-1.0f;
     }
     
