@@ -19,6 +19,7 @@ using namespace std;
 
 int directionLeft = 1;
 int directionRight = -1;
+
 float torDir = 1.0;
 float rShDir = 1.0;
 float rLaDir = 1.0;
@@ -27,11 +28,11 @@ float lLaDir = -1.0;
 Robot::Robot()
 {
     lFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    lLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
+    lLeg = new Block(3.5, 6, 3, .202, .329, .605, 1.0, 0.0, 25.0);                //Blue
     lThigh = new Block(2.7, 6, 2.7, 1, 1, 1, -1.0, 0.0, 1.0);            //White
     
     rFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    rLeg = new Block(3.5, 6, 3, .202, .329, .605, -1.0, 1.0, 1.0);                //Blue
+    rLeg = new Block(3.5, 6, 3, .202, .329, .605, -1.0, 1.0, 25.0);                //Blue
     rThigh = new Block(2.7, 6, 2.7, 1, 1, 1, -1.0, 0.0, -1.0);
     
     hips = new Block(7, 2.5, 4, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0);            //Gray
@@ -209,15 +210,17 @@ void Robot::update()
 {
     lThigh -> rotAngle += 0.5*directionLeft;
     rThigh -> rotAngle += 0.5*directionRight;
-    lLeg -> rotAngle += 0.5*directionLeft;
+    lLeg -> rotAngle += 0.5*directionRight;
+    rLeg -> rotAngle += 0.5*directionLeft;
     
-    if(lThigh->rotAngle == 15 || lThigh->rotAngle == -10){
+    if(lThigh->rotAngle == 20 || lThigh->rotAngle == -10){
         directionLeft = directionLeft*-1.0f;
     }
     
-    if(rThigh->rotAngle == -15 || rThigh->rotAngle == 10){
+    if(rThigh->rotAngle == -20 || rThigh->rotAngle == 10){
         directionRight = directionRight*-1.0f;
     }
+    
     torso->rotAngle += 0.55 * torDir;
     if (torso->rotAngle < -7 || torso->rotAngle > 7) {
             torDir = torDir * -1.0f;
@@ -237,5 +240,5 @@ void Robot::update()
         lLaDir = lLaDir * -1.0f;
 
     }
-    cout << lThigh->rotAngle << ".\n";
+    
 }
