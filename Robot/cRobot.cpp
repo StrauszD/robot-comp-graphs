@@ -16,8 +16,13 @@
 #include <iostream>
 using namespace std;
 
+
 int directionLeft = 1;
 int directionRight = -1;
+float torDir = 1.0;
+float rShDir = 1.0;
+float rLaDir = 1.0;
+float lLaDir = -1.0;
 
 Robot::Robot()
 {
@@ -31,18 +36,18 @@ Robot::Robot()
     
     hips = new Block(7, 2.5, 4, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0);            //Gray
     waist = new Block(6, 3, 3, 1, 1, 1, 0.0, 0.0, 0.0);                //White
-    torso = new Block(8, 5, 5, .627, .155, .139, 0, 1, 0.1);                //Red
+    torso = new Block(8, 5, 5, .627, .155, .139, 0, 1, 0);                //Red
     neck = new Block(2, 1.5, 2, 1, 1, 1, 0.0, 0.0, 0.0);
     head = new Block(3, 3.5, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
     
-    lShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.0, 0.0, 0.0);            //Red
+    lShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.1, 0.0, 0.0);            //Red
     lUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);            //White
-    lLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.0, 0.0, 0.0);                //Red
+    lLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.1, 0.0, 0.0);                //Red
     lHand = new Block(2.3, 2.5, 2.3, .202, .329, .605, 0.0, 0.0, 0.0);            //Blue
     
-    rShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.0, 0.0, 0.0);            //Red
+    rShoulder = new Block(3, 2.5, 3, .627, .155, .139, 0.1, 0.0, 0.0);            //Red
     rUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);            //White
-    rLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.0, 0.0, 0.0);                //Red
+    rLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.1, 0.0, 0.0);                //Red
     rHand = new Block(2.3, 2.5, 2.3, .202, .329, .605, 0.0, 0.0, 0.0);
     
 }
@@ -107,6 +112,7 @@ void Robot::draw()
             {
                 //RIGHT SHOULDER
                 glTranslatef(-5.5, 0, 0);
+                glRotatef(rShoulder->rotAngle, rShoulder->rotX, rShoulder->rotY, 0);
                 rShoulder->draw();
                 
                 //RIGHT UPPER ARM
@@ -115,6 +121,7 @@ void Robot::draw()
                 
                 //RIGHT LOWER ARM
                 glTranslatef(0, -3, 0);
+                glRotatef(rLowerArm->rotAngle, rLowerArm->rotX, rLowerArm->rotY, 0);
                 rLowerArm->draw();
                 
                 //RIGHT HAND
@@ -134,6 +141,7 @@ void Robot::draw()
             {
                 //LEFT SHOULDER
                 glTranslatef(5.5, 0, 0);
+                glRotatef(lShoulder->rotAngle, lShoulder->rotX, lShoulder->rotY, 0);
                 lShoulder->draw();
                 
                 //LEFT UPPER ARM
@@ -142,6 +150,7 @@ void Robot::draw()
                 
                 //LEFT LOWER ARM
                 glTranslatef(0, -3, 0);
+                glRotatef(lLowerArm->rotAngle, lLowerArm->rotX, lLowerArm->rotY, 0);
                 lLowerArm->draw();
                 
                 //LEFT HAND
@@ -155,9 +164,7 @@ void Robot::draw()
     }
     glPopMatrix();
     
-    
     //LEGS
-    
     //RIGHT LEG
     glPushMatrix();
     {
@@ -211,12 +218,24 @@ void Robot::update()
     if(rThigh->rotAngle == -15 || rThigh->rotAngle == 10){
         directionRight = directionRight*-1.0f;
     }
+    torso->rotAngle += 0.55 * torDir;
+    if (torso->rotAngle < -7 || torso->rotAngle > 7) {
+            torDir = torDir * -1.0f;
+    }
+    
+    rShoulder->rotAngle += 0.5*rShDir;
+    rLowerArm->rotAngle += 0.5*rLaDir;
+    lShoulder->rotAngle += -0.5*rShDir;
+    lLowerArm->rotAngle += 0.5*lLaDir;
+    if (rShoulder->rotAngle > 0 || rShoulder ->rotAngle < -10) {
+        rShDir = rShDir * -1.0f;
+    }
+    if (rLowerArm->rotAngle > 0 || rLowerArm->rotAngle < -10) {
+        rLaDir = rLaDir * -1.0f;
+    }
+    if (rLowerArm->rotAngle > 0 || rLowerArm->rotAngle < -10) {
+        lLaDir = lLaDir * -1.0f;
+
+    }
     cout << lThigh->rotAngle << ".\n";
-//    if (torso->rotAngle > 0) {
-//        if (torso->rotAngle <= 7) {
-//            torso->rotAngle += 0.5f;
-//        }
-//    } else {
-//        torso->rotAngle -= 0.5f;
-//    }
 }

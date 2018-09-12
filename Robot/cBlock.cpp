@@ -53,10 +53,6 @@ void Block::draw()            //Draw belongs to Block
         glColor3f(r, g, b);
         glutSolidCube(1);
         glRotatef(rotAngle, 0, 1, 0);
-        
-        glColor3f(0, 0, 0);
-        glutWireCube(1);
-        glRotatef(rotAngle, rotX, rotY, 0);
     }
     glPopMatrix();
 }
