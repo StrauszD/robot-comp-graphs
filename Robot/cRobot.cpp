@@ -202,40 +202,40 @@ void Robot::draw()
 
 void Robot::update()
 {
-    lThigh -> rotAngle += 0.5*directionLeft;
-    lLeg -> rotAngle += 0.2*directionRight;
-    lFoot-> rotAngle += 0.2*directionLeft;
+    lThigh -> rotAngle += 0.6  *directionLeft;
+    lLeg -> rotAngle += 0.3 * directionRight;
+    lFoot-> rotAngle += 0.3 * directionLeft;
     
-    rThigh -> rotAngle += 0.5*directionRight;
-    rLeg -> rotAngle += 0.2*directionLeft;
-    rFoot -> rotAngle += 0.2*directionRight;
+    rThigh -> rotAngle += 0.6 * directionRight;
+    rLeg -> rotAngle += 0.3 * directionLeft;
+    rFoot -> rotAngle += 0.3 * directionRight;
     
-    if(lThigh->rotAngle == 25 || lThigh->rotAngle == -25){
-        directionLeft = directionLeft*-1.0f;
+    if(lThigh->rotAngle > 22 || lThigh->rotAngle < -22){
+        directionLeft = directionLeft * -1.0f;
     }
     
-    if(rThigh->rotAngle == -25 || rThigh->rotAngle == 25){
-        directionRight = directionRight*-1.0f;
+    if(rThigh->rotAngle < -22 || rThigh->rotAngle > 22){
+        directionRight = directionRight * -1.0f;
     }
     
-    torso->rotAngle += 0.55 * torDir;
+    torso->rotAngle += 0.2 * torDir;
     if (torso->rotAngle < -7 || torso->rotAngle > 7) {
             torDir = torDir * -1.0f;
     }
     
-    rShoulder->rotAngle += 0.5*rShDir;
-    rLowerArm->rotAngle += 0.5*rLaDir;
-    lShoulder->rotAngle += -0.5*rShDir;
-    lLowerArm->rotAngle += 0.5*lLaDir;
-    if (rShoulder->rotAngle > 0 || rShoulder ->rotAngle < -10) {
+    rShoulder->rotAngle += 0.2*rShDir;
+    rLowerArm->rotAngle += 0.2*rLaDir;
+    lShoulder->rotAngle += -0.2*rShDir;
+    lLowerArm->rotAngle += -0.2*lLaDir;
+    if (rShoulder->rotAngle > 0 || rShoulder->rotAngle < -10) {
         rShDir = rShDir * -1.0f;
     }
     if (rLowerArm->rotAngle > 0 || rLowerArm->rotAngle < -10) {
         rLaDir = rLaDir * -1.0f;
     }
-    if (rLowerArm->rotAngle > 0 || rLowerArm->rotAngle < -10) {
+    if (rLowerArm->rotAngle < 0 || rLowerArm->rotAngle > -10) {
         lLaDir = lLaDir * -1.0f;
-
+        
     }
     
 }
