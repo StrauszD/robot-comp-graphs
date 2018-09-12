@@ -13,18 +13,21 @@
 //
 
 #include "cRobot.hpp"
+#include <iostream>
+using namespace std;
 
-
+int directionLeft = 1;
+int directionRight = -1;
 
 Robot::Robot()
 {
     lFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
     lLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    lThigh = new Block(2.7, 6, 2.7, 1, 1, 1, 0.0, 0.0, 0.0);            //White
+    lThigh = new Block(2.7, 6, 2.7, 1, 1, 1, -1.0, 0.0, 1.0);            //White
     
     rFoot = new Block(3.5, 1.5, 5, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    rLeg = new Block(3.5, 6, 3, .202, .329, .605, 0.0, 0.0, 0.0);                //Blue
-    rThigh = new Block(2.7, 6, 2.7, 1, 1, 1, 0.0, 0.0, 0.0);
+    rLeg = new Block(3.5, 6, 3, .202, .329, .605, -1.0, 1.0, 1.0);                //Blue
+    rThigh = new Block(2.7, 6, 2.7, 1, 1, 1, -1.0, 0.0, -1.0);
     
     hips = new Block(7, 2.5, 4, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0);            //Gray
     waist = new Block(6, 3, 3, 1, 1, 1, 0.0, 0.0, 0.0);                //White
@@ -41,6 +44,7 @@ Robot::Robot()
     rUpperArm = new Block(2.3, 2, 2.3, 1, 1, 1, 0.0, 0.0, 0.0);            //White
     rLowerArm = new Block(3, 4, 3, .627, .155, .139, 0.0, 0.0, 0.0);                //Red
     rHand = new Block(2.3, 2.5, 2.3, .202, .329, .605, 0.0, 0.0, 0.0);
+    
 }
 
 
@@ -159,6 +163,7 @@ void Robot::draw()
     {
         //RIGHT THIGH
         glTranslatef(-2.3, 3.5, 0);
+        glRotatef(rThigh->rotAngle, rThigh-> rotX, rThigh-> rotY, 0);
         rThigh->draw();
         
         //RIGHT LEG
@@ -176,10 +181,12 @@ void Robot::draw()
     {
         //LEFT THIGH
         glTranslatef(2.3, 3.5, 0);
+        glRotatef(lThigh->rotAngle, lThigh-> rotX, lThigh-> rotY, 0);
         lThigh->draw();
         
         //LEFT LEG
         glTranslatef(0, -6, 0);
+        glRotatef(lLeg->rotAngle, lLeg-> rotX, lLeg->rotY, 0);
         lLeg->draw();
         
         //LEFT FOOT
@@ -193,11 +200,23 @@ void Robot::draw()
 
 void Robot::update()
 {
-    if (torso->rotAngle > 0) {
-        if (torso->rotAngle <= 7) {
-            torso->rotAngle += 0.5f;
-        }
-    } else {
-        torso->rotAngle -= 0.5f;
+    lThigh -> rotAngle += 0.5*directionLeft;
+    rThigh -> rotAngle += 0.5*directionRight;
+    lLeg -> rotAngle += 0.5*directionLeft;
+    
+    if(lThigh->rotAngle == 15 || lThigh->rotAngle == -10){
+        directionLeft = directionLeft*-1.0f;
     }
+    
+    if(rThigh->rotAngle == -15 || rThigh->rotAngle == 10){
+        directionRight = directionRight*-1.0f;
+    }
+    cout << lThigh->rotAngle << ".\n";
+//    if (torso->rotAngle > 0) {
+//        if (torso->rotAngle <= 7) {
+//            torso->rotAngle += 0.5f;
+//        }
+//    } else {
+//        torso->rotAngle -= 0.5f;
+//    }
 }
