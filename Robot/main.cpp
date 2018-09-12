@@ -3,11 +3,11 @@
 //  Robot
 //
 //  Created by:
-//      Daniel Strausz
-//      Alfonso Ledesma
-//      Alejandro Montaño
-//      Braulio Santiago
-//      Mariana Piscil
+//      Daniel Strausz      A01332949
+//      Alfonso Ledesma     A01339894
+//      Alejandro Montaño   A01339420
+//      Braulio Santiago    A01650398
+//      Mariana Piscil      A01651783
 //  on 9/10/18.
 //  Copyright © 2018 Daniel Strausz. All rights reserved.
 //
@@ -27,53 +27,43 @@
 
 Robot* robot;
 
-
-void init() // FOR GLUT LOOP
+void init()
 {
     robot = new Robot();
     
-    glEnable(GL_DEPTH_TEST);            // Enable check for close and far objects.
-    glClearColor(0.5, 0.5, 0.5, 0);    // Clear the color state.
-    glMatrixMode(GL_MODELVIEW);            // Go to 3D mode.
-    glLoadIdentity();                    // Reset 3D view matrix.
+    glEnable(GL_DEPTH_TEST);
+    glClearColor(0.5, 0.5, 0.5, 0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 }
 
 
-void display()                                                        // Called for each frame (about 60 times per second).
+void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);               // Clear color and depth buffers.
-    glLoadIdentity();                                               // Reset 3D view matrix.
-    gluLookAt(40, 19, 40,                                               // Where the camera is.
-              0, 8.5, 0,                                                      // To where the camera points at.
-              0.0, 1, 0.0);                                               // "UP" vector.
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    gluLookAt(40, 19, 40,
+              0, 8.5, 0,
+              0.0, 1, 0.0);
     
     robot->draw();
-    glutSwapBuffers();                                                // Swap the hidden and visible buffers.
+    glutSwapBuffers();
 }
 
 
-void idle()                                                            // Called when drawing is finished.
+void idle()
 {
     robot->update();
-    glutPostRedisplay();                                            // Display again.
+    glutPostRedisplay();
 }
 
-
-//KEYS IS A CALLBACK FOR THE KEYBOARD EVENT
-void keys(unsigned char pressedKey, int x, int y)
+void reshape(int h, int v)
 {
-    
-}
-
-
-
-void reshape(int h, int v)                                            // Called when the window geometry changes.
-{
-    glMatrixMode(GL_PROJECTION);                                    // Go to 2D mode.
-    glLoadIdentity();                                                // Reset the 2D matrix.
-    gluPerspective(40.0, (GLdouble)h / (GLdouble)v, 0.5, 200.0);        // Configure the camera lens aperture.
-    glMatrixMode(GL_MODELVIEW);                                        // Go to 3D mode.
-    glViewport(0, 0, h, v);                                            // Configure the camera frame dimensions.
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(40.0, (GLdouble)h / (GLdouble)v, 0.5, 200.0);
+    glMatrixMode(GL_MODELVIEW);
+    glViewport(0, 0, h, v);
     gluLookAt(0.0, 1.0, 4.0,
               0.0, 0.0, 0.0,
               0.0, 1.0, 0.0);
@@ -82,16 +72,15 @@ void reshape(int h, int v)                                            // Called 
 
 int main(int argc, char* argv[])
 {
-    glutInit(&argc, argv);                                            // Init GLUT with command line parameters.
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);        // Use 2 buffers (hidden and visible). Use the depth buffer. Use 3 color channels.
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("CG TEST");
+    glutCreateWindow("Robot");
     
     init();
-    glutKeyboardFunc(keys);
-    glutReshapeFunc(reshape);                                        // Reshape CALLBACK function.
-    glutDisplayFunc(display);                                        // Display CALLBACK function.
-    glutIdleFunc(idle);                                                // Idle CALLBACK function.
-    glutMainLoop();                                                    // Begin graphics program.
-    return 0;                                                        // ANSI C requires a return value.
+    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);
+    glutIdleFunc(idle);
+    glutMainLoop();
+    return 0;
 }
